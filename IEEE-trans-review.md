@@ -18,11 +18,7 @@ This skill provides detailed instructions for reviewing a paper submitted to an 
 
 - Use IEEE numbered citation format: references are cited as bracketed numbers in order of appearance, e.g., [1], [2], [3].
 - Every in-text citation must have a corresponding entry in the reference list, and vice versa.
-- Reference list entries must follow IEEE style:
-  - **Journal article**: Author initials and last name, "Title in quotes," *Abbreviated Journal Name*, vol. X, no. Y, pp. Z–Z, Month Year, doi: 10.XXXX/XXXXX.
-  - **Conference paper**: Author initials and last name, "Title," in *Proc. Conference Name (ABBREV)*, City, Country, Year, pp. Z–Z.
-  - **Book**: Author initials and last name, *Title*, Edition. City, Country: Publisher, Year.
-  - **Online source**: Author, "Title," Website Name, Month Day, Year. [Online]. Available: URL. [Accessed: Month Day, Year].
+- Reference list entries must follow IEEE style.
 - Journal and conference names must use standard IEEE abbreviations (see IEEE Editorial Style Manual).
 - Include a DOI for every reference where one is available.
 - References must be listed in the order they first appear in the text, not alphabetically.
