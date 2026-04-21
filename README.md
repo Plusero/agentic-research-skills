@@ -34,9 +34,38 @@ resources/
 
 ## Usage
 
+### Cursor
+
 Copy any skill folder into your target project at:
 
 `.cursor/skills/<skill-name>/SKILL.md`
+
+### Claude Code
+
+Based on the Claude Code skills documentation:
+
+1. Copy any skill folder into either:
+   - project scope: `.claude/skills/<skill-name>/SKILL.md`
+   - personal scope: `~/.claude/skills/<skill-name>/SKILL.md`
+2. Keep `SKILL.md` frontmatter (`name`, `description`) intact.
+3. Invoke directly with `/skill-name`, or let Claude auto-invoke when the request matches the description.
+
+Reference: [Claude Code Skills Docs](https://code.claude.com/docs/en/skills)
+
+### OpenCode
+
+Based on the OpenCode Agent Skills documentation:
+
+1. Copy any skill folder into one of these locations:
+   - project scope: `.opencode/skills/<skill-name>/SKILL.md`
+   - personal scope: `~/.config/opencode/skills/<skill-name>/SKILL.md`
+   - Claude-compatible scope: `.claude/skills/<skill-name>/SKILL.md` or `~/.claude/skills/<skill-name>/SKILL.md`
+   - agent-compatible scope: `.agents/skills/<skill-name>/SKILL.md` or `~/.agents/skills/<skill-name>/SKILL.md`
+2. Ensure `SKILL.md` includes frontmatter with `name` and `description`.
+3. Keep skill directory name and `name` value aligned (lowercase alphanumeric with hyphens).
+4. OpenCode discovers and loads skills via the `skill` tool when available.
+
+Reference: [OpenCode Agent Skills Docs](https://opencode.ai/docs/skills/)
 
 ## Contributing
 
