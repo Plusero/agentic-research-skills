@@ -18,7 +18,8 @@ This repository stores project skills under `resources/skills/`.
 Ready-to-use skills in this repository:
 
 - [`literature-review`](resources/skills/literature-review/SKILL.md) - Summarize academic PDF publications into structured Markdown with per-bullet source locations.
-- [`manuscript-review`](resources/skills/manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
+- [`ieee-manuscript-review`](resources/skills/ieee-manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
+- [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
 
 ## Structure
 
