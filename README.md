@@ -20,6 +20,7 @@ Ready-to-use skills in this repository:
 - [`literature-review`](resources/skills/literature-review/SKILL.md) - Summarize academic PDF publications into structured Markdown with per-bullet source locations.
 - [`ieee-manuscript-review`](resources/skills/ieee-manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
 - [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
+- [`scientific-plotting`](resources/skills/scientific-plotting/SKILL.md) - Create publication-quality scientific figures in Python using Matplotlib and SciencePlots.
 
 ## Structure
 
