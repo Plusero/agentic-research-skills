@@ -55,7 +55,7 @@ description: Search IEEE Xplore, arXiv, and Google Scholar for papers on a user-
 
 ## Output Format
 
-Use this template:
+Use this template. Repeat the `Top 10 Papers` item format for each selected paper.
 
 ```markdown
 # Literature Search: <topic>
@@ -77,96 +77,6 @@ Use this template:
    - Link: <url>
    - Why relevant: <one sentence>
    - Summary: <2 to 4 sentences on the paper's problem, method, and key result>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-2. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-3. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-4. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-5. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-6. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-7. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-8. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-9. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
-
-10. **<paper title>**
-   - Authors: <authors>
-   - Year: <year>
-   - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences>
    - Evidence basis: <full text | abstract | metadata plus abstract>
 ```
 

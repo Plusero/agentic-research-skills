@@ -1,5 +1,5 @@
 ---
-name: summarize-academic-pdf-with-sources
+name: literature-review
 description: Read an academic publication in PDF format and produce a structured Markdown summary. Use when the user asks to summarize a research paper, journal article, conference paper, or any .pdf academic document.
 ---
 

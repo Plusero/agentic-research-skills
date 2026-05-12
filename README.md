@@ -1,13 +1,14 @@
 # Agentic Research Skills
 
-> A curated collection of reusable Cursor skills for academic and manuscript workflows.
+> A curated collection of reusable agent skills for academic and manuscript workflows.
 
-Cursor skills are reusable `SKILL.md` instruction files that teach the agent how to perform specific tasks.  
+Skills are reusable `SKILL.md` instruction files that teach an agent how to perform specific tasks.
 This repository stores project skills under `resources/skills/`.
 
 ## Contents
 
 - Skills
+- Structure
 - Usage
 - Contributing
 
@@ -18,6 +19,7 @@ This repository stores project skills under `resources/skills/`.
 Ready-to-use skills in this repository:
 
 - [`literature-review`](resources/skills/literature-review/SKILL.md) - Summarize academic PDF publications into structured Markdown with per-bullet source locations.
+- [`topic-literature-search`](resources/skills/topic-literature-search/SKILL.md) - Search academic sources for a topic, verify candidate papers, and produce a sourced top-10 literature summary.
 - [`ieee-manuscript-review`](resources/skills/ieee-manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
 - [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
 - [`scientific-plotting`](resources/skills/scientific-plotting/SKILL.md) - Create publication-quality scientific figures in Python using Matplotlib and SciencePlots.
@@ -74,4 +76,6 @@ To add a new skill:
 
 1. Create `resources/skills/<skill-name>/`.
 2. Add `SKILL.md` with valid frontmatter (`name`, `description`).
-3. Keep instructions specific, testable, and scoped to one workflow.
+3. Keep the folder name and frontmatter `name` value aligned.
+4. Keep instructions specific, testable, and scoped to one workflow.
+5. Run `python3 scripts/validate_skills.py` before submitting changes.

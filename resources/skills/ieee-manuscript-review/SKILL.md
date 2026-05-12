@@ -1,5 +1,5 @@
 ---
-name: ieee-trans-review
+name: ieee-manuscript-review
 description: Review an IEEE Transactions manuscript against the IEEEtran manuscript and bibliography requirements documented in the bundled IEEEtran HOWTO references.
 ---
 
@@ -121,4 +121,3 @@ When you report findings:
 2. List `General editorial issues` second, only if there are any.
 3. For each issue, provide a precise location such as the section title, paragraph, figure number, table number, equation number, or reference number.
 4. When possible, name which reference supports the comment: `IEEEtran_HOWTO.pdf` or `IEEEtran_bst_HOWTO.pdf`.
-
