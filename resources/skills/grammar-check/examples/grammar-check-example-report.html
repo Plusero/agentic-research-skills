@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammar Check Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.55; margin: 2rem; color: #1f2937; }
+    h1, h2 { line-height: 1.2; }
+    .summary { border-left: 4px solid #2563eb; padding-left: 1rem; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel { border: 1px solid #d1d5db; border-radius: 6px; padding: 1rem; background: #f9fafb; }
+    .diff del { background: #fee2e2; color: #991b1b; text-decoration: line-through; }
+    .diff ins { background: #dcfce7; color: #166534; text-decoration: none; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: inherit; }
+    @media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } body { margin: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>Grammar Check Report</h1>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Total corrections:</strong> 8</li>
+      <li><strong>Main patterns:</strong> subject-verb agreement, article use, tense consistency, punctuation, word form, and spelling.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Before and After</h2>
+    <div class="comparison">
+      <div class="panel">
+        <h3>Original</h3>
+        <pre>The results shows that our method are more faster than the baseline. We test it on three dataset, and the model perform good. However there is many limitation, the experiment was run only one time and it do not include noisy measurements.</pre>
+      </div>
+      <div class="panel">
+        <h3>Corrected</h3>
+        <pre>The results show that our method is faster than the baseline. We tested it on three datasets, and the model performed well. However, there are many limitations: the experiment was run only once, and it does not include noisy measurements.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlighted Differences</h2>
+    <p class="diff">The results <del>shows</del><ins>show</ins> that our method <del>are more faster</del><ins>is faster</ins> than the baseline. We <del>test</del><ins>tested</ins> it on three <del>dataset</del><ins>datasets</ins>, and the model <del>perform good</del><ins>performed well</ins>. <del>However there is many limitation,</del><ins>However, there are many limitations:</ins> the experiment was run only <del>one time</del><ins>once</ins>, and it <del>do</del><ins>does</ins> not include noisy measurements.</p>
+  </section>
+
+  <section>
+    <h2>Grammar Notes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Original</th>
+          <th>Correction</th>
+          <th>Rule</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sentence 1</td>
+          <td>results shows</td>
+          <td>results show</td>
+          <td>Rule 1: Subject-verb agreement</td>
+          <td>The plural subject "results" requires the plural verb "show."</td>
+        </tr>
+        <tr>
+          <td>Sentence 1</td>
+          <td>method are</td>
+          <td>method is</td>
+          <td>Rule 1: Subject-verb agreement</td>
+          <td>The singular subject "method" requires the singular verb "is."</td>
+        </tr>
+        <tr>
+          <td>Sentence 1</td>
+          <td>more faster</td>
+          <td>faster</td>
+          <td>Rule 10: Word choice and idiom</td>
+          <td>"Faster" is already comparative, so "more" is redundant and unidiomatic.</td>
+        </tr>
+        <tr>
+          <td>Sentence 2</td>
+          <td>We test</td>
+          <td>We tested</td>
+          <td>Rule 2: Verb tense and aspect</td>
+          <td>The surrounding text describes completed experiments, so past tense is clearer.</td>
+        </tr>
+        <tr>
+          <td>Sentence 2</td>
+          <td>three dataset</td>
+          <td>three datasets</td>
+          <td>Rule 9: Word form and part of speech</td>
+          <td>The number "three" requires the plural noun "datasets."</td>
+        </tr>
+        <tr>
+          <td>Sentence 2</td>
+          <td>perform good</td>
+          <td>performed well</td>
+          <td>Rule 9: Word form and part of speech</td>
+          <td>The verb needs past tense, and "well" is the adverb form that modifies "performed."</td>
+        </tr>
+        <tr>
+          <td>Sentence 3</td>
+          <td>However there is many limitation,</td>
+          <td>However, there are many limitations:</td>
+          <td>Rules 1, 11, and 13</td>
+          <td>The phrase needs a comma after "However," plural agreement with "limitations," and stronger punctuation before the explanation.</td>
+        </tr>
+        <tr>
+          <td>Sentence 3</td>
+          <td>it do not</td>
+          <td>it does not</td>
+          <td>Rule 1: Subject-verb agreement</td>
+          <td>The singular subject "it" requires "does."</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Clean Corrected Text</h2>
+    <pre>The results show that our method is faster than the baseline. We tested it on three datasets, and the model performed well. However, there are many limitations: the experiment was run only once, and it does not include noisy measurements.</pre>
+  </section>
+</body>
+</html>

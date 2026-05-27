@@ -22,6 +22,7 @@ Ready-to-use skills in this repository:
 - [`topic-literature-search`](resources/skills/topic-literature-search/SKILL.md) - Search academic sources for a topic, verify candidate papers, and produce a sourced top-10 literature summary.
 - [`ieee-manuscript-review`](resources/skills/ieee-manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
 - [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
+- [`grammar-check`](resources/skills/grammar-check/SKILL.md) - Check grammar, punctuation, mechanics, and usage with explicit rule references in a reader-friendly before/after HTML report.
 - [`scientific-plotting`](resources/skills/scientific-plotting/SKILL.md) - Create publication-quality scientific figures in Python using Matplotlib and SciencePlots.
 
 ## Structure
