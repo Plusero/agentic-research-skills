@@ -32,6 +32,7 @@ import scienceplots
 6. **Explicit figure size**: Always set figure size explicitly via `plt.figure(figsize=(width, height))` or `fig, ax = plt.subplots(figsize=(width, height))` rather than relying on defaults.
 7. **Tight layout**: Call `fig.tight_layout()` or `plt.tight_layout()` before saving to avoid clipped labels.
 8. **Use the context manager for temporary styles**: When applying a style only to one figure inside a larger script, use `with plt.style.context(['science', ...]):` instead of `plt.style.use(...)`.
+9. **Visually inspect the rendered figure**: After generating a figure, open the produced image and look at it directly. If the publication output is a vector file (`.pdf` or `.svg`), also save or render a temporary `.png` preview for inspection. Check that all user requirements are actually satisfied, including axis labels, units, legends, tick readability, spacing, aspect ratio, color/marker distinguishability, and absence of clipped or overlapping elements. If anything is wrong, adjust the plotting code and regenerate the figure. Repeat this visual inspection and adjustment loop until the rendered figure meets the requirements.
 
 ## Style Selection Guide
 
@@ -77,3 +78,4 @@ with plt.style.context(['science']):
 - If sample data is needed to make the script runnable, generate it with NumPy (e.g., `np.linspace`, `np.random`).
 - Prefer `fig, ax = plt.subplots(...)` over the implicit `plt` state machine API.
 - When saving multiple figures, give each file a descriptive name that reflects its content.
+- Do not consider the task complete until you have visually inspected the rendered figure and made any needed iterative adjustments.
