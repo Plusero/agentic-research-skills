@@ -1,6 +1,6 @@
 ---
 name: paper-readability-check
-description: Check the readability of an academic paper draft and report concrete sentence-level and paragraph-level issues using a fixed readability strategy checklist.
+description: Check the readability of an academic paper draft and produce a reader-friendly before/after readability report, preferably as a standalone HTML file with explicit checklist references.
 ---
 
 # Paper Readability Check
@@ -44,31 +44,130 @@ Apply every check below to the provided text:
 
 ## Output Format
 
-Use exactly this structure:
+By default, create a standalone `.html` report in the workspace and tell the user the file path. Use a descriptive filename such as `paper-readability-check-report.html` unless the user provides a document name. If the user asks for inline output only, use the compact Markdown fallback below.
+
+For a concrete example of the expected HTML output, see `examples/paper-readability-check-example-report.html`.
+
+Use the same reader-friendly report structure as `grammar-check`:
+
+1. **Summary**: Count readability revisions and list the highest-impact patterns.
+2. **Before and After**: Show the original text and a readability-improved version side by side.
+3. **Highlighted Differences**: Show suggested readability changes inline using deletion and insertion styling.
+4. **Readability Notes**: Use a table with location, original phrase, suggested revision, checklist reference, and plain-language explanation.
+5. **Clean Revised Text**: Provide the final readability-improved text without markup.
+
+Use this HTML structure as the report baseline:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper Readability Check Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.55; margin: 2rem; color: #1f2937; }
+    h1, h2 { line-height: 1.2; }
+    .summary { border-left: 4px solid #2563eb; padding-left: 1rem; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel { border: 1px solid #d1d5db; border-radius: 6px; padding: 1rem; background: #f9fafb; }
+    .diff del { background: #fee2e2; color: #991b1b; text-decoration: line-through; }
+    .diff ins { background: #dcfce7; color: #166534; text-decoration: none; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: inherit; }
+    @media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } body { margin: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>Paper Readability Check Report</h1>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Total readability revisions:</strong> [number]</li>
+      <li><strong>Main patterns:</strong> [short pattern summary]</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Before and After</h2>
+    <div class="comparison">
+      <div class="panel">
+        <h3>Original</h3>
+        <pre>[original text]</pre>
+      </div>
+      <div class="panel">
+        <h3>Revised</h3>
+        <pre>[readability-improved text]</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlighted Differences</h2>
+    <p class="diff">[diff text with <del>removed text</del> and <ins>added text</ins>]</p>
+  </section>
+
+  <section>
+    <h2>Readability Notes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Original</th>
+          <th>Revision</th>
+          <th>Checklist</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[paragraph/sentence cue]</td>
+          <td>[short original phrase]</td>
+          <td>[short suggested revision]</td>
+          <td>Item [number]: [checklist name]</td>
+          <td>[plain-language explanation of the readability issue]</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Clean Revised Text</h2>
+    <pre>[readability-improved text without markup]</pre>
+  </section>
+</body>
+</html>
+```
+
+For short inline checks or when HTML is not wanted, use this compact Markdown format:
 
 ```markdown
-## Readability Issues
+## Before and After
 
-1. [Severity: High] <location>
-   - Checklist item: <number>
-   - Problem: <why this hurts readability>
-   - Suggestion: <concise rewrite guidance>
+Original:
+> <original text>
 
-2. [Severity: Medium] <location>
-   - Checklist item: <number>
-   - Problem: <why this hurts readability>
-   - Suggestion: <concise rewrite guidance>
+Revised:
+> <readability-improved text>
 
-## Strengths
+## Difference
 
-- <clear readability strength tied to checklist>
-- <clear readability strength tied to checklist>
+<original phrase> -> <suggested revision>
 
-## Priority Revisions
+## Readability Notes
 
-1. <highest-impact readability fix>
-2. <second highest-impact readability fix>
-3. <third highest-impact readability fix>
+| Location | Original | Revision | Checklist | Why |
+|---|---|---|---|---|
+| <paragraph/sentence cue> | <short original phrase> | <short suggested revision> | Item <number>: <checklist name> | <plain-language explanation> |
+
+## Reader-Friendly Summary
+
+- <highest-impact readability fix or pattern>
+- <second-highest-impact readability fix or pattern>
+- <optional note about text that was already clear>
 ```
 
 ## Rules
@@ -77,3 +176,6 @@ Use exactly this structure:
 - Do not provide grammar-only nitpicks unless they affect readability.
 - Do not provide vague feedback; every issue must be localized.
 - Keep output concise, specific, and directly actionable.
+- In HTML reports, escape user-supplied text before inserting it into HTML; only generated `<del>` and `<ins>` tags should be markup.
+- Use `<del>` for removed original wording and `<ins>` for inserted revised wording in the highlighted difference section.
+- If no readability issues are found, say so clearly and include the revised text unchanged.

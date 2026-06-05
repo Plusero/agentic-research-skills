@@ -1,6 +1,6 @@
 ---
 name: ieee-manuscript-review
-description: Review an IEEE Transactions manuscript against the IEEEtran manuscript and bibliography requirements documented in the bundled IEEEtran HOWTO references.
+description: Review an IEEE Transactions manuscript against the bundled IEEEtran HOWTO references and produce a reader-friendly manuscript review report, preferably as a standalone HTML file with explicit reference support.
 ---
 
 # IEEE Transactions Paper Review Skill
@@ -115,9 +115,141 @@ Apply only requirements that are explicitly supported by those two references. I
 
 ### 10. Output Format
 
-When you report findings:
+By default, create a standalone `.html` report in the workspace and tell the user the file path. Use a descriptive filename such as `ieee-manuscript-review-report.html` unless the user provides a document name. If the user asks for inline output only, use the compact Markdown fallback below.
 
-1. List `IEEEtran compliance issues` first.
-2. List `General editorial issues` second, only if there are any.
-3. For each issue, provide a precise location such as the section title, paragraph, figure number, table number, equation number, or reference number.
-4. When possible, name which reference supports the comment: `IEEEtran_HOWTO.pdf` or `IEEEtran_bst_HOWTO.pdf`.
+For a concrete example of the expected HTML output, see `examples/ieee-manuscript-review-example-report.html`.
+
+Use the same reader-friendly report structure as `grammar-check`:
+
+1. **Summary**: Count IEEEtran compliance issues and general editorial issues, then list the highest-impact patterns.
+2. **Before and After**: Show affected original excerpts, rendered observations, or source snippets beside the recommended revision or action.
+3. **Highlighted Differences**: Show text changes inline using deletion and insertion styling where a rewrite is appropriate. For layout, source, figure, table, or bibliography issues without a direct prose rewrite, state the recommended action clearly.
+4. **Manuscript Review Notes**: Use a table with location, observed issue, recommended revision/action, category, reference support, and plain-language explanation.
+5. **Clean Revision Checklist**: Provide the final action list without markup.
+
+Use this HTML structure as the report baseline:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IEEE Manuscript Review Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.55; margin: 2rem; color: #1f2937; }
+    h1, h2 { line-height: 1.2; }
+    .summary { border-left: 4px solid #2563eb; padding-left: 1rem; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel { border: 1px solid #d1d5db; border-radius: 6px; padding: 1rem; background: #f9fafb; }
+    .diff del { background: #fee2e2; color: #991b1b; text-decoration: line-through; }
+    .diff ins { background: #dcfce7; color: #166534; text-decoration: none; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: inherit; }
+    @media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } body { margin: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>IEEE Manuscript Review Report</h1>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>IEEEtran compliance issues:</strong> [number]</li>
+      <li><strong>General editorial issues:</strong> [number]</li>
+      <li><strong>Main patterns:</strong> [short pattern summary]</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Before and After</h2>
+    <div class="comparison">
+      <div class="panel">
+        <h3>Observed</h3>
+        <pre>[original excerpt, rendered observation, or source snippet]</pre>
+      </div>
+      <div class="panel">
+        <h3>Recommended</h3>
+        <pre>[recommended revision or action]</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlighted Differences</h2>
+    <p class="diff">[diff text with <del>removed text</del> and <ins>added text</ins>, or clear non-prose action]</p>
+  </section>
+
+  <section>
+    <h2>Manuscript Review Notes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Observed</th>
+          <th>Recommendation</th>
+          <th>Category</th>
+          <th>Reference</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[section/figure/table/equation/reference/source cue]</td>
+          <td>[short observed issue]</td>
+          <td>[short recommended revision or action]</td>
+          <td>[IEEEtran compliance issue / General editorial issue]</td>
+          <td>[IEEEtran_HOWTO.pdf / IEEEtran_bst_HOWTO.pdf / General editorial suggestion]</td>
+          <td>[plain-language explanation]</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Clean Revision Checklist</h2>
+    <pre>[action list without markup]</pre>
+  </section>
+</body>
+</html>
+```
+
+For short inline checks or when HTML is not wanted, use this compact Markdown format:
+
+```markdown
+## Before and After
+
+Observed:
+> <original excerpt, rendered observation, or source snippet>
+
+Recommended:
+> <recommended revision or action>
+
+## Difference
+
+<observed phrase or issue> -> <recommended revision or action>
+
+## Manuscript Review Notes
+
+| Location | Observed | Recommendation | Category | Reference | Why |
+|---|---|---|---|---|---|
+| <section/figure/table/equation/reference/source cue> | <short observed issue> | <short recommended revision or action> | <IEEEtran compliance issue / General editorial issue> | <IEEEtran_HOWTO.pdf / IEEEtran_bst_HOWTO.pdf / General editorial suggestion> | <plain-language explanation> |
+
+## Reader-Friendly Summary
+
+- <highest-impact compliance or editorial fix>
+- <second-highest-impact compliance or editorial fix>
+- <optional note about material that appears compliant>
+```
+
+## Rules
+
+- List IEEEtran compliance issues before general editorial issues in the notes table and checklist.
+- For each issue, provide a precise location such as the section title, paragraph, figure number, table number, equation number, reference number, or source snippet.
+- When possible, name which reference supports the comment: `IEEEtran_HOWTO.pdf` or `IEEEtran_bst_HOWTO.pdf`.
+- Do not present a comment as an IEEEtran compliance issue unless it is supported by the bundled HOWTO references.
+- In HTML reports, escape user-supplied text before inserting it into HTML; only generated `<del>` and `<ins>` tags should be markup.
+- Use `<del>` for removed original wording and `<ins>` for inserted revised wording in the highlighted difference section.
+- If no issues are found, say so clearly and include a short checklist of items that were verified.

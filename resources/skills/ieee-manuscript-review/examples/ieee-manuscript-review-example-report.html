@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IEEE Manuscript Review Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.55; margin: 2rem; color: #1f2937; }
+    h1, h2 { line-height: 1.2; }
+    .summary { border-left: 4px solid #2563eb; padding-left: 1rem; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel { border: 1px solid #d1d5db; border-radius: 6px; padding: 1rem; background: #f9fafb; }
+    .diff del { background: #fee2e2; color: #991b1b; text-decoration: line-through; }
+    .diff ins { background: #dcfce7; color: #166534; text-decoration: none; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: inherit; }
+    @media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } body { margin: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>IEEE Manuscript Review Report</h1>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>IEEEtran compliance issues:</strong> 3</li>
+      <li><strong>General editorial issues:</strong> 2</li>
+      <li><strong>Main patterns:</strong> figure and table caption placement, IEEE bibliography URL style, and unclear technical phrasing.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Before and After</h2>
+    <div class="comparison">
+      <div class="panel">
+        <h3>Observed</h3>
+        <pre>Figure 2 caption appears above the figure.
+Table I caption appears below the table.
+[12] J. Smith, "Dataset," https://example.org/data.
+The proposed algorithm makes it better under noisy cases.</pre>
+      </div>
+      <div class="panel">
+        <h3>Recommended</h3>
+        <pre>Move the Figure 2 caption below the figure.
+Move the Table I caption above the table.
+[12] J. Smith, "Dataset," [Online]. Available: https://example.org/data
+The proposed initialization reduces voltage-magnitude error under noisy measurement conditions.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlighted Differences</h2>
+    <p class="diff">For Reference [12], change <del>https://example.org/data.</del><ins>[Online]. Available: https://example.org/data</ins> For the editorial sentence, change <del>The proposed algorithm makes it better under noisy cases.</del><ins>The proposed initialization reduces voltage-magnitude error under noisy measurement conditions.</ins> Non-prose actions: move the Figure 2 caption below the figure and move the Table I caption above the table.</p>
+  </section>
+
+  <section>
+    <h2>Manuscript Review Notes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Observed</th>
+          <th>Recommendation</th>
+          <th>Category</th>
+          <th>Reference</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Figure 2</td>
+          <td>Caption appears above the figure.</td>
+          <td>Place the caption below the figure.</td>
+          <td>IEEEtran compliance issue</td>
+          <td>IEEEtran_HOWTO.pdf</td>
+          <td>IEEE figure captions are placed below figures.</td>
+        </tr>
+        <tr>
+          <td>Table I</td>
+          <td>Caption appears below the table.</td>
+          <td>Place the caption above the table.</td>
+          <td>IEEEtran compliance issue</td>
+          <td>IEEEtran_HOWTO.pdf</td>
+          <td>IEEE table captions are placed above tables.</td>
+        </tr>
+        <tr>
+          <td>Reference [12]</td>
+          <td>URL appears as a bare URL with final punctuation.</td>
+          <td>Use "[Online]. Available:" before the URL and omit punctuation after the URL.</td>
+          <td>IEEEtran compliance issue</td>
+          <td>IEEEtran_bst_HOWTO.pdf</td>
+          <td>The IEEE bibliography style for online references uses explicit online availability wording and does not punctuate the URL itself.</td>
+        </tr>
+        <tr>
+          <td>Section III, paragraph 2</td>
+          <td>The proposed algorithm makes it better under noisy cases.</td>
+          <td>The proposed initialization reduces voltage-magnitude error under noisy measurement conditions.</td>
+          <td>General editorial issue</td>
+          <td>General editorial suggestion</td>
+          <td>The original sentence uses vague pronouns and does not state what improves.</td>
+        </tr>
+        <tr>
+          <td>Introduction, paragraph 1</td>
+          <td>Repeated use of "state estimation method" for both the task and the proposed approach.</td>
+          <td>Reserve "state estimation" for the task and use "proposed initializer" for the method.</td>
+          <td>General editorial issue</td>
+          <td>General editorial suggestion</td>
+          <td>Consistent terminology helps readers distinguish the problem from the contribution.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Clean Revision Checklist</h2>
+    <pre>1. Move Figure 2 caption below the figure.
+2. Move Table I caption above the table.
+3. Reformat Reference [12] as an IEEE-style online reference.
+4. Replace vague result wording in Section III with a specific measured improvement.
+5. Make terminology consistent between the state-estimation task and the proposed initializer.</pre>
+  </section>
+</body>
+</html>

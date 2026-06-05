@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper Readability Check Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.55; margin: 2rem; color: #1f2937; }
+    h1, h2 { line-height: 1.2; }
+    .summary { border-left: 4px solid #2563eb; padding-left: 1rem; }
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .panel { border: 1px solid #d1d5db; border-radius: 6px; padding: 1rem; background: #f9fafb; }
+    .diff del { background: #fee2e2; color: #991b1b; text-decoration: line-through; }
+    .diff ins { background: #dcfce7; color: #166534; text-decoration: none; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d1d5db; padding: 0.5rem; vertical-align: top; }
+    th { background: #f3f4f6; text-align: left; }
+    pre { white-space: pre-wrap; font-family: inherit; }
+    @media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } body { margin: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>Paper Readability Check Report</h1>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <ul>
+      <li><strong>Total readability revisions:</strong> 5</li>
+      <li><strong>Main patterns:</strong> overloaded sentences, unclear demonstrative reference, weak information ordering, and redundant wording.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Before and After</h2>
+    <div class="comparison">
+      <div class="panel">
+        <h3>Original</h3>
+        <pre>State estimation is important for distribution networks because operators need accurate voltage states and the measurements are often sparse and noisy, and this creates a difficult optimization problem. In this paper, a neural initialization is proposed and it is combined with weighted least squares. This improves convergence. The method is evaluated on IEEE 33-bus and CIGRE networks, which are standard benchmarks, and the results show lower error and faster runtime compared with flat starts.</pre>
+      </div>
+      <div class="panel">
+        <h3>Revised</h3>
+        <pre>Distribution network operators need accurate voltage states, but field measurements are often sparse and noisy. These measurement limits make state estimation a difficult optimization problem. This paper combines a neural initialization with weighted least squares. This initialization improves convergence. We evaluate the method on IEEE 33-bus and CIGRE benchmark networks, and the results show lower error and faster runtime than flat starts.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Highlighted Differences</h2>
+    <p class="diff"><del>State estimation is important for distribution networks because operators need accurate voltage states and the measurements are often sparse and noisy, and this creates a difficult optimization problem.</del><ins>Distribution network operators need accurate voltage states, but field measurements are often sparse and noisy. These measurement limits make state estimation a difficult optimization problem.</ins> In this paper, <del>a neural initialization is proposed and it is combined</del><ins>we combine a neural initialization</ins> with weighted least squares. <del>This improves convergence.</del><ins>This initialization improves convergence.</ins> The method is evaluated on IEEE 33-bus and CIGRE <del>networks, which are standard benchmarks, and the results show lower error and faster runtime compared with</del><ins>benchmark networks, and the results show lower error and faster runtime than</ins> flat starts.</p>
+  </section>
+
+  <section>
+    <h2>Readability Notes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Original</th>
+          <th>Revision</th>
+          <th>Checklist</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sentence 1</td>
+          <td>State estimation is important...and this creates a difficult optimization problem.</td>
+          <td>Distribution network operators need accurate voltage states...These measurement limits make state estimation difficult.</td>
+          <td>Item 2: Limit sentence content</td>
+          <td>The original sentence carries motivation, measurement conditions, and consequence at once. Splitting it lets each idea land cleanly.</td>
+        </tr>
+        <tr>
+          <td>Sentence 1</td>
+          <td>State estimation is important for distribution networks because operators need...</td>
+          <td>Distribution network operators need...</td>
+          <td>Item 4: Information ordering</td>
+          <td>Starting with the operators gives readers a concrete actor before introducing the state-estimation problem.</td>
+        </tr>
+        <tr>
+          <td>Sentence 2</td>
+          <td>a neural initialization is proposed and it is combined</td>
+          <td>we combine a neural initialization</td>
+          <td>Item 13: Voice choice</td>
+          <td>Active voice is shorter and makes the paper's contribution easier to identify.</td>
+        </tr>
+        <tr>
+          <td>Sentence 3</td>
+          <td>This improves convergence.</td>
+          <td>This initialization improves convergence.</td>
+          <td>Item 9: Demonstrative clarity</td>
+          <td>The summary noun "initialization" clarifies what "This" refers to.</td>
+        </tr>
+        <tr>
+          <td>Sentence 4</td>
+          <td>networks, which are standard benchmarks, and the results show</td>
+          <td>benchmark networks, and the results show</td>
+          <td>Item 12: Conciseness</td>
+          <td>The revision preserves the benchmark information while removing a parenthetical interruption.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Clean Revised Text</h2>
+    <pre>Distribution network operators need accurate voltage states, but field measurements are often sparse and noisy. These measurement limits make state estimation a difficult optimization problem. This paper combines a neural initialization with weighted least squares. This initialization improves convergence. We evaluate the method on IEEE 33-bus and CIGRE benchmark networks, and the results show lower error and faster runtime than flat starts.</pre>
+  </section>
+</body>
+</html>
