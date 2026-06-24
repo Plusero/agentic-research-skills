@@ -63,6 +63,8 @@ Use these conventions by default:
 - Label `MV bus` and `LV bus` when those busbars exist.
 - Do not label feeders with IDs such as `F1`, `F2`, or `Feeder 1` unless the user explicitly requests feeder labels or the source diagram already uses them and the task is to preserve existing labels.
 - Use a small legend for symbols that appear in the drawing, typically `External grid`, `Bus`, `Load`, `Transformer`, and any switch or breaker symbol actually present.
+- Enclose the legend in a dashed rectangular box.
+- Place the legend where it minimizes the total figure footprint while keeping clear spacing from the network and avoiding text-symbol overlap.
 - Remove legend entries for components that do not exist in the diagram.
 - Place all labels so they do not cross conductors, overlap symbols, touch arrowheads, or obscure switch states.
 
@@ -76,6 +78,7 @@ Use these conventions by default:
 - Keep transformer rings centered on the main conductor path, with visible gaps where the conductor stops and resumes.
 - Maintain clear spacing between text and graphical symbols. Move labels outward or adjust connector routing when text would overlap nodes, arrows, busbars, transformers, or the external-grid symbol.
 - Keep symbol sizes aesthetically balanced across the diagram. Avoid oversized arrows, tiny transformer rings, disproportionate external-grid squares, or labels that visually dominate the electrical symbols.
+- Position the legend compactly in unused whitespace near the diagram rather than expanding the canvas unnecessarily.
 
 ## Output Rules
 
@@ -99,5 +102,6 @@ Before final delivery:
 - Confirm symbol sizes are balanced and visually consistent across the diagram.
 - Confirm no text overlaps or touches symbols, conductors, arrowheads, or other labels.
 - Confirm feeder labels such as `F1` and `F2` are absent unless explicitly requested or intentionally preserved from the source.
+- Confirm the legend is enclosed in a dashed box and placed compactly to avoid unnecessary figure whitespace.
 - Confirm labels and legend entries match the actual symbols in the drawing.
 - Render or export the `.drawio` and inspect the actual visual output specifically for text-symbol overlap and label readability. If Draw.io export tooling is unavailable, report that limitation and perform XML-level checks for geometry, labels, and symbol consistency instead.
