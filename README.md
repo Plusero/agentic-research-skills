@@ -24,6 +24,7 @@ Ready-to-use skills in this repository:
 - [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
 - [`grammar-check`](resources/skills/grammar-check/SKILL.md) - Check grammar, punctuation, mechanics, and usage with explicit rule references in a reader-friendly before/after HTML report.
 - [`scientific-plotting`](resources/skills/scientific-plotting/SKILL.md) - Create publication-quality scientific figures in Python using Matplotlib and SciencePlots.
+- [`iec-network-drawio`](resources/skills/iec-network-drawio/SKILL.md) - Create or revise IEC 60617-style distribution-grid diagrams in Draw.io/.drawio files while preserving electrical topology.
 
 ## Structure
 
