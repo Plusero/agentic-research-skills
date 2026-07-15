@@ -36,6 +36,7 @@ Revise and re-inspect until every check passes. Never declare the figure complet
 - Make the main path obvious at a glance and traceable in detail.
 - Group related steps into named phases and place labels near their objects.
 - Use arrows for meaningful transformations, not decoration.
+- Keep each connector's final segment straight and perpendicular to the target edge, and place terminal bends far enough from the target that the arrowhead clearly points into it rather than sideways or backward.
 - Show concrete inputs, meaningful intermediate states, and final outputs.
 - Use a small color-vision-deficiency-safe palette with redundant shape or line cues.
 - When the complete workflow figure is placed on a 16:9 slide, render every label at least 18 pt at final slide size; reduce label density or simplify the figure rather than using smaller text.
