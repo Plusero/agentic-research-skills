@@ -1,98 +1,51 @@
 ---
 name: draw-research-pipelines
-description: Create, revise, and validate publication-ready research pipeline and workflow figures from manuscripts, method descriptions, source code, data schemas, rough sketches, or existing diagrams. Use for model architectures, data flows, experimental protocols, study designs, system architectures, graphical abstracts, and requests to draw, redraw, simplify, or quality-check a scientific workflow figure.
+description: Create, revise, and validate publication-ready scientific pipeline and workflow figures in Draw.io from manuscripts, methods, code, schemas, sketches, or existing diagrams. Use for research pipelines, model architectures, data flows, experimental protocols, study designs, system architectures, graphical abstracts, and requests to draw, redraw, simplify, or quality-check a scientific workflow figure.
 ---
 
 # Draw Research Pipelines
 
-## Goal
-
-Turn scientific source material into an accurate, legible, and editable workflow figure. Model the scientific process first, draw it second, and validate the rendered result last.
+Create an accurate, legible, editable pipeline figure. Model the science first, build the figure in Draw.io, and visually inspect the rendered export before delivery.
 
 ## Workflow
 
-### 1. Establish the figure contract
+1. **Define the message.** Identify what the reader must understand, the intended audience, required content, output format, and publication constraints. Ask only when ambiguity could change the scientific meaning.
 
-- Identify the audience, publication venue, target dimensions, output format, and required level of detail.
-- Infer reasonable defaults when these constraints are absent.
-- Ask a question only when an ambiguity could materially change the scientific meaning.
-- Write a one-sentence statement of what the reader should understand from the figure.
+2. **Map the pipeline.** Extract inputs, outputs, stages, transformations, persistent entities, branches, merges, loops, intermediate states, and quality-control gates. Every arrow must express a clear relationship or action.
 
-### 2. Extract the semantic graph
+3. **Choose the structure.** Use the simplest faithful layout: linear, branched, cyclic, layered, multiscale, or comparative. Establish one dominant reading direction and route secondary or feedback paths around the main flow.
 
-Before drawing, identify:
+4. **Build in Draw.io.** Use Draw.io (`.drawio`) as the editable source for pipeline figures. Use vector shapes and a consistent grammar: shapes for entity types, colors for phases or categories, line styles for relationship types, and arrowheads for direction. Direct-label elements where practical and keep recurring entities visually consistent.
 
-- inputs and outputs;
-- stages and transformations;
-- data, samples, models, instruments, and other persistent entities;
-- branches, merges, feedback loops, repetitions, and quality-control gates;
-- intermediate artifacts or state changes that carry scientific meaning;
-- uncertain or omitted details.
+5. **Fit an A4 paper.** Unless the venue specifies otherwise, design for an A4 portrait page (210 × 297 mm) with a maximum figure area of 180 × 240 mm, leaving room for margins and a caption. Set the Draw.io page or export bounds to the intended final size; remove excess whitespace. Keep text at least 8 pt at final size and ensure strokes, arrowheads, and spacing remain clear when the entire figure is viewed on one A4 page.
 
-Represent arrows as explicit relationships or actions. Do not stabilize the layout until the semantic graph is coherent.
+6. **Export and visually inspect.** Export vector PDF and a PNG preview, then the agent must open and visually check the rendered figure at its intended A4 placement. Do not rely only on source structure or automated checks. Confirm:
 
-### 3. Select a visual archetype
+   - all stages, dependencies, branches, and outputs are scientifically correct;
+   - reading order, hierarchy, and arrow direction are immediately clear;
+   - labels are legible at final size and terminology matches the manuscript;
+   - shapes, colors, and line styles retain one meaning throughout;
+   - crossings, bends, clutter, and unused whitespace are minimized;
+   - nothing is clipped, overlapping, misaligned, pixelated, or font-dependent;
+   - the figure remains understandable in grayscale and with common color-vision deficiencies.
 
-Choose the simplest structure that preserves the science:
+Revise and re-inspect until every check passes. Never declare the figure complete without opening the rendered export and checking it visually at final size.
 
-- linear for a dominant sequence;
-- branched for alternatives or parallel paths;
-- cyclic for genuine iteration or feedback;
-- layered for software, model, or system levels;
-- multiscale for movement between spatial or temporal scales;
-- symmetric for paired or comparative workflows.
+## Design rules
 
-Prefer one dominant reading direction. Route secondary paths and feedback loops around the main spine.
-
-### 4. Explore and select a layout
-
-- Produce two or three low-fidelity candidates when the structure admits meaningfully different layouts.
-- Score candidates for scientific fidelity, reading order, hierarchy, crossings, label proximity, compactness, and accessibility.
-- Select the strongest candidate and record any deliberate simplifications.
-
-### 5. Render an editable figure
-
-- Use vector graphics by default.
-- Apply a consistent visual grammar: shape for entity type, color for category or phase, line style for relationship type, and arrowheads for direction.
-- Preserve the visual identity of recurring samples, datasets, models, or outputs.
-- Direct-label elements where possible instead of relying on a distant legend.
-- Show concrete inputs, scientifically meaningful intermediate states, and the final research output.
-- Keep text, strokes, spacing, and icons legible at the intended publication size.
-- Use a small color-vision-deficiency-safe palette with redundant shape, pattern, or line cues.
-
-### 6. Validate and revise
-
-Render the final export and inspect it visually. Check:
-
-1. **Scientific fidelity** — Every required stage, dependency, branch, and output is correct.
-2. **Topology** — The start, direction, and endpoint are immediately apparent; crossings and unnecessary bends are minimized.
-3. **Hierarchy** — Major phases dominate supporting detail, and related operations are visibly grouped.
-4. **Semantic consistency** — Shapes, colors, names, arrows, and line styles retain one meaning throughout.
-5. **Legibility and accessibility** — Text survives final-size viewing; the figure remains understandable in grayscale and with common color-vision deficiencies.
-6. **Production quality** — Nothing is clipped, misaligned, pixelated, or dependent on unavailable fonts.
-7. **Caption consistency** — Terminology, numbering, abbreviations, and claims agree with the manuscript.
-
-Revise until all checks pass. Never declare the figure complete without inspecting the rendered output at its intended size.
-
-## Core design rules
-
-- Make the figure understandable at two speeds: rapid orientation and detailed tracing.
-- Establish one dominant visual path.
-- Group related steps into clearly named phases.
-- Keep labels next to the objects they describe.
-- Use arrows to communicate meaningful transformations, not decoration.
-- Move feedback loops to the perimeter when possible.
-- Minimize crossings, bends, branches, and decorative clutter.
-- Avoid unexplained acronyms and details that do not support the figure's main claim.
-- Ensure the caption adds nuance rather than basic navigation instructions.
-- Use external examples for design inspiration only; do not reproduce another paper's figure or distinctive artwork.
+- Make the main path obvious at a glance and traceable in detail.
+- Group related steps into named phases and place labels near their objects.
+- Use arrows for meaningful transformations, not decoration.
+- Show concrete inputs, meaningful intermediate states, and final outputs.
+- Use a small color-vision-deficiency-safe palette with redundant shape or line cues.
+- Remove unexplained acronyms, decorative clutter, and details that do not support the figure's message.
+- Use published examples only as inspiration; do not reproduce distinctive artwork.
 
 ## Deliverables
 
-Provide, as appropriate:
+Provide:
 
-- an editable SVG, Draw.io, PowerPoint, or equivalent source file;
-- a publication-ready PDF and high-resolution PNG;
-- a concise figure caption and accessible alt text;
-- an optional JSON or YAML diagram specification for reproducibility;
-- a short note describing assumptions, simplifications, and validation results.
+- editable `.drawio` source;
+- publication-ready vector PDF and PNG preview;
+- concise caption and accessible alt text;
+- brief assumptions and visual-validation note.
