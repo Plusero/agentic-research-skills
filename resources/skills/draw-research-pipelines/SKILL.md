@@ -38,6 +38,7 @@ Revise and re-inspect until every check passes. Never declare the figure complet
 - Use arrows for meaningful transformations, not decoration.
 - Show concrete inputs, meaningful intermediate states, and final outputs.
 - Use a small color-vision-deficiency-safe palette with redundant shape or line cues.
+- When the complete workflow figure is placed on a 16:9 slide, render every label at least 16 pt at final slide size; reduce label density or simplify the figure rather than using smaller text.
 - Remove unexplained acronyms, decorative clutter, and details that do not support the figure's message.
 - Use published examples only as inspiration; do not reproduce distinctive artwork.
 
