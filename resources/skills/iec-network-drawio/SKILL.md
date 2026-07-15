@@ -20,6 +20,10 @@ For new diagrams without an existing source, establish the topology from the use
 5. Generate or edit the diagram as editable Draw.io `mxCell` primitives, not as a flattened screenshot or embedded raster.
 6. Render or export the final `.drawio`, then visually inspect alignment, symbol overlap, text-symbol overlap, label clutter, and unintended crossings. Do not rely only on XML geometry checks when visual rendering is available.
 
+## Basic Rules
+1. The drawing should fit in a 16:9 .ppt slide.
+2. The fonts should be at least 18pt.
+
 ## Topology Rules
 
 - Do not convert a radial feeder drawing into a row-based topology unless explicitly requested.
