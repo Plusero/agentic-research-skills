@@ -17,9 +17,9 @@ Create an accurate, legible, editable pipeline figure. Model the science first, 
 
 4. **Build in Draw.io.** Use Draw.io (`.drawio`) as the editable source for pipeline figures. Use vector shapes and a consistent grammar: shapes for entity types, colors for phases or categories, line styles for relationship types, and arrowheads for direction. Direct-label elements where practical and keep recurring entities visually consistent.
 
-5. **Fit an A4 paper.** Unless the venue specifies otherwise, design for an A4 portrait page (210 × 297 mm) with a maximum figure area of 180 × 240 mm, leaving room for margins and a caption. Set the Draw.io page or export bounds to the intended final size; remove excess whitespace. Keep text at least 8 pt at final size and ensure strokes, arrowheads, and spacing remain clear when the entire figure is viewed on one A4 page.
+5. **Fit a 16:9 slide.** Unless another format is specified, design for a widescreen 16:9 slide and leave sufficient margins for presentation use. Set the Draw.io page or export bounds to a 16:9 aspect ratio and remove excess whitespace. Keep every label at least 18 pt at final slide size, and ensure strokes, arrowheads, and spacing remain clear when the complete figure is viewed on one slide. Reduce label density or simplify the figure rather than shrinking the text.
 
-6. **Export and visually inspect.** Export vector PDF and a PNG preview, then the agent must open and visually check the rendered figure at its intended A4 placement. Do not rely only on source structure or automated checks. Confirm:
+6. **Export and visually inspect.** Export vector PDF and a PNG preview, then the agent must open and visually check the rendered figure at its intended placement on a 16:9 slide. Do not rely only on source structure or automated checks. Confirm:
 
    - all stages, dependencies, branches, and outputs are scientifically correct;
    - reading order, hierarchy, and arrow direction are immediately clear;
