@@ -1,61 +1,33 @@
 ---
 name: topic-literature-search
-description: Search IEEE Xplore, arXiv, and Google Scholar for papers on a user-specified research topic, rank the ten most relevant results, and produce a sourced literature summary. Use when the user asks for related papers, a literature scan, a paper shortlist, or a research summary for a topic.
+description: Search IEEE Xplore, arXiv, and Google Scholar for papers on a user-specified research topic, score verified candidates, and produce a sourced shortlist of up to ten papers. Use when the user asks for related papers, a literature scan, a paper shortlist, or a research summary for a topic.
 ---
 
 # Topic Literature Search
 
-## Instructions
+## Workflow
 
-1. Identify the research topic, plus any constraints the user provides:
-   - Subtopic or method
-   - Application domain
-   - Year range
-   - Preference for surveys, seminal papers, or recent papers
-
-2. Convert the request into 3 to 6 search queries:
-   - One broad query for the full topic
-   - One or more synonym or acronym variants
-   - One query for recent work
-   - One query for surveys or review papers when useful
-
-3. Search these sources:
-   - IEEE Xplore for peer-reviewed engineering and computer science papers
-   - arXiv for recent preprints and emerging work
-   - Google Scholar for broad coverage, citation signal, and older foundational papers
-
-4. Build a candidate pool of at least 15 verified papers before ranking the final 10.
-
-5. Verify every candidate before including it:
-   - Confirm the title, authors, year, and venue from the source page or publisher page
-   - Prefer DOI, publisher, or arXiv links over secondary reposts
-   - If Google Scholar is used for discovery, verify bibliographic details from an authoritative page before finalizing
-   - Do not invent missing metadata
-
-6. Deduplicate results by title, DOI, or arXiv identifier.
-
-7. Rank papers by relevance using these factors:
-   - Direct match to the user's topic
-   - Methodological match
-   - Venue credibility
-   - Citation signal or field influence
-   - Recency when the topic is fast-moving
-   - Survey value if the user needs broad orientation
-
-8. Select the 10 most relevant verified papers.
-   - Balance seminal and recent papers when both matter
-   - If fewer than 10 verified papers are available, say so explicitly and return the verified set
-
-9. Summarize each selected paper.
-   - Use the abstract and full text when available
-   - If only metadata or abstract is accessible, say that the summary is based on the abstract
-   - Keep summaries grounded in the source and specific to the paper's actual contribution
-
-10. Return the results in Markdown using the exact section order below.
+1. Record up to four topic concepts and any supplied method, application domain, year range, publication-type preference, or exclusion criterion. Record supplied acronyms and synonyms under the corresponding topic concept.
+2. Generate three to six queries:
+   - one query containing all recorded topic concepts;
+   - one query for each recorded acronym or synonym absent from the first query;
+   - one query with the lower bound of the requested year range, or the current year minus five when the user asks for recent work without defining a range;
+   - one query containing `survey` OR `review` when the user requests an overview, survey, or review.
+3. Search IEEE Xplore, arXiv, and Google Scholar. Record any source that could not be queried.
+4. Build a pool of at least 15 unique candidates, unless fewer than 15 can be verified. Deduplicate by DOI, then arXiv ID, then case-folded title with punctuation removed.
+5. Verify title, author list, year, venue, DOI or arXiv ID, and abstract against an IEEE Xplore record, publisher page, DOI landing page, arXiv record, or Crossref record. Do not use Google Scholar as the final source for a bibliographic field.
+6. Exclude a candidate that violates a user-specified year, language, publication type, domain, or method constraint.
+7. Score each remaining candidate:
+   - topic terms: 0–4 points, one point for each recorded topic concept whose term, acronym, or recorded synonym occurs in the title or abstract;
+   - method: 2 points when the requested method is used by the paper, 1 when it appears only as a baseline or comparator, and 0 when absent;
+   - application domain: 2 points when experiments use the requested domain, 1 when the domain appears only in motivation or related work, and 0 when absent;
+   - publication type: 1 point when it matches the user's requested type, otherwise 0; award 1 point to any type when none was requested;
+   - evidence availability: 1 point for accessible full text, 0.5 for an accessible abstract, and 0 for metadata only.
+8. Sort by total score, then by the topic-term score, then by publication year descending. Select the first ten. If fewer than ten candidates remain, return all of them and report the count.
+9. For each selected paper with an abstract or full text, write two to four sentences covering the stated problem, method, and reported result. For metadata-only records, write one sentence containing only title-derived scope, year, and venue. Mark the evidence basis as `full text`, `abstract`, or `metadata only`.
+10. Return Markdown in the section order below.
 
 ## Output Format
-
-Use this template. Repeat the `Top 10 Papers` item format for each selected paper.
 
 ```markdown
 # Literature Search: <topic>
@@ -63,30 +35,31 @@ Use this template. Repeat the `Top 10 Papers` item format for each selected pape
 ## Search Scope
 - Topic: <topic>
 - Constraints: <constraints or "None">
-- Databases searched: IEEE Xplore, arXiv, Google Scholar
-- Search queries: <comma-separated queries>
-- Notes: <access limitations or "None">
+- Databases searched: <successfully queried databases>
+- Unavailable databases: <databases and failure reason, or "None">
+- Search queries: <queries separated by semicolons>
+- Verified candidate count: <number>
+- Scoring: topic 0–4; method 0–2; domain 0–2; publication type 0–1; evidence 0–1
 
-## Top 10 Papers
+## Ranked Papers
 
 1. **<paper title>**
    - Authors: <authors>
    - Year: <year>
    - Venue: <venue or "arXiv">
-   - Source: <IEEE Xplore | arXiv | Google Scholar + verified source>
-   - Link: <url>
-   - Why relevant: <one sentence>
-   - Summary: <2 to 4 sentences on the paper's problem, method, and key result>
-   - Evidence basis: <full text | abstract | metadata plus abstract>
+   - Identifier: <DOI or arXiv ID>
+   - Verified at: <IEEE Xplore | publisher | DOI | arXiv | Crossref>
+   - Link: <verification URL>
+   - Score: <total>/10 (topic <n>/4; method <n>/2; domain <n>/2; type <n>/1; evidence <n>/1)
+   - Matched criteria: <topic concepts, method, domain, and type that earned points>
+   - Summary: <problem, method, and reported result>
+   - Evidence basis: <full text | abstract | metadata only>
 ```
 
-## Guardrails
+## Checks
 
-- Verify bibliographic details before presenting them.
-- Prefer authoritative links and accessible abstracts over citation-only pages.
-- Separate discovery from verification: Google Scholar can help find papers, but final metadata should come from an authoritative source when possible.
-- Do not present fabricated citations, authors, years, venues, or claims.
-- If multiple papers are near-duplicates, keep the strongest or most complete version.
-- If the topic is broad, prefer a mix of surveys and primary papers.
-- If the topic is narrow, prefer direct methodological matches over highly cited but tangential papers.
-- If access to a source is blocked, state the limitation clearly.
+- Open every verification URL before delivery.
+- Match every output field to the verification record; write `Not reported` instead of guessing.
+- For a journal/conference version and its preprint, retain the journal/conference version and link the preprint as an additional full-text source. Retain the preprint instead only when the user requests preprints or it contains a later revision.
+- Do not cite a search-results page as the verification URL.
+- State each database access failure in `Unavailable databases` with the returned error or access restriction.

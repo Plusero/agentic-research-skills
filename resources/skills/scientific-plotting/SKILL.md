@@ -1,81 +1,86 @@
 ---
 name: scientific-plotting
-description: Create publication-quality scientific figures in Python using Matplotlib and SciencePlots. Use when the user asks to plot data, generate figures for a paper, or improve the appearance of a scientific chart.
+description: Create and validate scientific figures in Python using Matplotlib and SciencePlots. Use when the user asks to plot data, generate a paper figure, reproduce a chart, or revise a scientific plot's layout or styling.
 ---
 
 # Scientific Plotting
 
 ## Setup
 
-Install SciencePlots before use:
+Install SciencePlots when it is absent:
 
 ```bash
 pip install SciencePlots
 ```
 
-SciencePlots requires a LaTeX installation. See the [FAQ](https://github.com/garrettj403/SciencePlots/wiki/FAQ#installing-latex) for installation instructions.
+SciencePlots requires a LaTeX installation for styles that set `text.usetex=True`. If LaTeX is unavailable and installation is outside the task scope, use `plt.rc_context({"text.usetex": False})` and report the substitution.
 
-Always begin every plotting script with:
+Start plotting scripts with:
 
 ```python
 import matplotlib.pyplot as plt
 import scienceplots
 ```
 
-## Rules
+## Construction Rules
 
-1. **Use SciencePlots styles**: Always apply the `science` style as the base. Combine with journal-specific styles when the target venue is known (e.g., `['science', 'ieee']` for IEEE papers, `['science', 'nature']` for Nature articles).
-2. **No figure titles**: Never call `ax.set_title()` or `plt.title()`. Figures in scientific papers are identified by their caption, not an inline title.
-3. **Always label axes**: Every axis must have a label with units in parentheses, e.g., `ax.set_xlabel('Frequency (GHz)')`.
-4. **Include a legend when multiple data series are present**: Use `ax.legend()` with concise, descriptive labels.
-5. **Save figures in vector format**: Export as `.pdf` or `.svg` for publication. Use `.png` only for quick previews or when vector output is not acceptable.
-6. **Explicit figure size**: Always set figure size explicitly via `plt.figure(figsize=(width, height))` or `fig, ax = plt.subplots(figsize=(width, height))` rather than relying on defaults.
-7. **Tight layout**: Call `fig.tight_layout()` or `plt.tight_layout()` before saving to avoid clipped labels.
-8. **Use the context manager for temporary styles**: When applying a style only to one figure inside a larger script, use `with plt.style.context(['science', ...]):` instead of `plt.style.use(...)`.
-9. **Visually inspect the rendered figure**: After generating a figure, open the produced image and look at it directly. If the publication output is a vector file (`.pdf` or `.svg`), also save or render a temporary `.png` preview for inspection. Check that all user requirements are actually satisfied, including axis labels, units, legends, tick readability, spacing, aspect ratio, color/marker distinguishability, and absence of clipped or overlapping elements. If anything is wrong, adjust the plotting code and regenerate the figure. Repeat this visual inspection and adjustment loop until the rendered figure meets the requirements.
+1. Apply `science` as the base style. Add `ieee`, `nature`, `notebook`, or `grayscale` only under the conditions in the style table below.
+2. Do not call `ax.set_title()` or `plt.title()` unless the user explicitly requests an in-figure title.
+3. Label every displayed axis. Include units in parentheses; use `(dimensionless)` when the quantity has no unit and omit the parenthetical only for category labels.
+4. When two or more series share an axes, add a legend with one entry per series. Use the variable, treatment, model, or scenario name as the entry text.
+5. Export a PDF or SVG. Also export a PNG preview when the requested deliverable is vector-only.
+6. Set `figsize` explicitly. Use the user's dimensions; otherwise use `(3.5, 2.6)` inches for a single-column figure and `(7.16, 3.5)` inches for a double-column figure.
+7. Call `fig.tight_layout()` before saving. If it emits a warning or leaves clipping, replace it with explicit `subplots_adjust` values.
+8. Use `with plt.style.context([...]):` when the script creates figures that use different style sets.
+9. Distinguish series by at least two of color, marker, and line style when the figure must work in grayscale or has more than four series.
 
-## Style Selection Guide
+## Style Selection
 
-| Target venue / context | Recommended style combination |
+| Condition | Style list |
 |---|---|
-| General scientific paper | `'science'` |
-| IEEE Transactions / conference | `['science', 'ieee']` |
-| Nature family journals | `['science', 'nature']` |
-| Jupyter notebook | `['science', 'notebook']` |
-| Poster / presentation | `['science', 'notebook']` with larger `figsize` |
-| Black-and-white print | `['science', 'ieee']` or add `'grayscale'` |
+| No venue specified | `['science']` |
+| IEEE Transactions or IEEE conference | `['science', 'ieee']` |
+| Nature-family journal | `['science', 'nature']` |
+| Notebook, poster, or presentation | `['science', 'notebook']` |
+| Grayscale output requested | `['science', 'grayscale']` |
 
 ## Template
-
-Use this template as the starting point for every new figure:
 
 ```python
 import matplotlib.pyplot as plt
 import scienceplots
 
 with plt.style.context(['science']):
-    fig, ax = plt.subplots(figsize=(4, 3))
+    fig, ax = plt.subplots(figsize=(3.5, 2.6))
 
-    # --- plot data ---
     ax.plot(x, y, label='Series label')
-
-    # --- axes labels (always include units) ---
     ax.set_xlabel('Variable (unit)')
     ax.set_ylabel('Variable (unit)')
-
-    # --- legend (omit when only one series) ---
     ax.legend()
 
     fig.tight_layout()
-    fig.savefig('figure.pdf')
+    fig.savefig('dependent-variable-vs-independent-variable.pdf')
+    fig.savefig('dependent-variable-vs-independent-variable.png', dpi=300)
 ```
 
-## Output Rules
+## Validation
 
-- Generate complete, runnable Python code.
-- Do not add `plt.title()` or `ax.set_title()` calls anywhere in the output.
-- Include all necessary imports at the top of the script.
-- If sample data is needed to make the script runnable, generate it with NumPy (e.g., `np.linspace`, `np.random`).
-- Prefer `fig, ax = plt.subplots(...)` over the implicit `plt` state machine API.
-- When saving multiple figures, give each file a descriptive name that reflects its content.
-- Do not consider the task complete until you have visually inspected the rendered figure and made any needed iterative adjustments.
+1. Run the completed script and require a zero exit status.
+2. Open the PNG preview at its exported dimensions and verify:
+   - every requested series, annotation, panel, and reference line is present;
+   - every displayed axis has a label and unit treatment matching rule 3;
+   - the legend has one entry per plotted series and no entry is truncated;
+   - no label, tick label, legend, annotation, or panel identifier overlaps another text or data element;
+   - no text or plotted element crosses the image boundary;
+   - color, marker, and line-style assignments satisfy rule 9;
+   - the pixel dimensions equal the requested dimensions or the `figsize × dpi` values.
+3. Open the PDF or SVG at 400% zoom and verify that text and line art show no raster pixels or compression blocks.
+4. Revise, rerun, and repeat the checks after the final code change.
+
+## Deliverables
+
+- runnable Python source with all imports;
+- PDF or SVG output;
+- PNG preview;
+- the values used for style list, figure size, and DPI;
+- a statement that the script exited successfully and the visual checks passed.

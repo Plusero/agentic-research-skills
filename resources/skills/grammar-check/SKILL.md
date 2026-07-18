@@ -1,11 +1,9 @@
 ---
 name: grammar-check
-description: Check text for grammar, punctuation, mechanics, and usage errors, then produce a reader-friendly before/after correction report, preferably as a standalone HTML file with explicit rule references.
+description: Check text for grammar, punctuation, mechanics, and usage errors, then produce corrected text and a before/after report with a numbered rule reference for every change. Use for proofreading prose, academic writing, emails, documentation, reports, or short passages.
 ---
 
 # Grammar Check
-
-Use this skill when the user asks to check, proofread, correct, polish, or review grammar in prose, academic writing, emails, documentation, reports, or short passages.
 
 ## Grammar Rules
 
@@ -14,7 +12,7 @@ Apply every rule below to the supplied text:
 1. **Subject-verb agreement**: Make the verb agree with the grammatical subject in number and person, including with compound subjects, intervening phrases, and collective nouns.
 2. **Verb tense and aspect**: Use tense consistently and choose the tense/aspect that matches the timing, duration, and sequence of events.
 3. **Sentence completeness**: Fix fragments, comma splices, fused sentences, and run-on sentences.
-4. **Pronoun agreement and reference**: Make pronouns agree with their antecedents and ensure every pronoun points to a clear noun or noun phrase.
+4. **Pronoun agreement and reference**: Make pronouns agree with their antecedents and flag a pronoun when two or more preceding noun phrases match its number and gender.
 5. **Articles and determiners**: Use "a," "an," "the," quantifiers, and possessives correctly for countability, specificity, and idiom.
 6. **Prepositions and particles**: Use idiomatic prepositions and verb particles; correct missing, extra, or mismatched prepositions.
 7. **Modifier placement**: Place adjectives, adverbs, participial phrases, and limiting modifiers near the words they modify; fix dangling or misplaced modifiers.
@@ -23,36 +21,36 @@ Apply every rule below to the supplied text:
 10. **Word choice and idiom**: Correct non-idiomatic phrasing, confused words, and incorrect collocations while preserving the intended meaning.
 11. **Punctuation**: Use commas, semicolons, colons, apostrophes, quotation marks, parentheses, and end punctuation according to the sentence structure.
 12. **Capitalization**: Capitalize proper nouns, titles, acronyms, sentence starts, and headings consistently.
-13. **Spelling and typographical errors**: Correct misspellings, duplicated words, missing words, and obvious typos.
+13. **Spelling and typographical errors**: Correct misspellings, duplicated words, missing words required by the sentence grammar, and character transpositions.
 14. **Hyphenation and compounds**: Use hyphens for compound modifiers and established terms where needed for clarity.
 15. **Number, abbreviation, and symbol consistency**: Keep number style, abbreviations, units, symbols, and spacing internally consistent.
 
 ## Instructions
 
 1. Read the full text before making corrections.
-2. Preserve the user's meaning, tone, terminology, formatting, and technical claims.
-3. Correct grammar and mechanics directly when the fix is clear.
-4. If multiple valid corrections exist, choose the most natural option for the surrounding context.
+2. Preserve every factual claim, degree of certainty, technical term, citation, paragraph boundary, list structure, and formatting element not implicated by a correction.
+3. Apply a correction directly when one option satisfies the applicable rule without changing a property listed in step 2.
+4. When multiple corrections satisfy the rule, choose the option with the fewest changed words; if tied, choose the option consistent with the document's existing English variety and terminology.
 5. If a sentence is ambiguous, explain the ambiguity instead of guessing.
 6. Report only visible issues from the supplied text; do not invent issues to cover every rule.
-7. Combine repeated instances of the same minor issue when that is easier to read.
-8. Prefer concise explanations that teach the rule without lecturing.
-9. Show the difference between the original and corrected text whenever practical.
-10. If the user asks only for a clean corrected version, provide the corrected text first and keep notes brief.
-11. If the text is long, group issues by paragraph or section and focus on the most important corrections.
+7. Combine repeated instances into one table row only when they use the same rule and the same original-to-corrected pattern; list every affected location in that row.
+8. Explain each correction in one sentence that names the grammatical mismatch and the rule that resolves it.
+9. Show every changed span with paired `<del>` and `<ins>` markup in HTML or an `original -> correction` pair in Markdown.
+10. If the user requests only corrected text, return only corrected text and do not create a report.
+11. For inputs longer than 1,500 words, group table rows by the input's section headings, or by paragraph ranges when headings are absent.
 
 ## Output Format
 
-By default, create a standalone `.html` report in the workspace and tell the user the file path. Use a descriptive filename such as `grammar-check-report.html` unless the user provides a document name. If the user asks for inline output only, use the compact Markdown fallback below.
+By default, create `grammar-check-report.html` in the workspace, or `<input-name>-grammar-check.html` when the input has a filename. If the user asks for inline output only, use the Markdown format below.
 
 For a concrete example of the expected HTML output, see `examples/grammar-check-example-report.html`.
 
-The HTML report must include these reader-friendly sections:
+The HTML report must include these sections:
 
-1. **Summary**: Count major issue types and list the highest-impact patterns.
+1. **Summary**: Report the total corrections and issue types in descending order by count.
 2. **Before and After**: Show the original text and corrected text side by side.
 3. **Highlighted Differences**: Show changes inline using deletion and insertion styling.
-4. **Grammar Notes**: Use a table with location, original phrase, corrected phrase, rule reference, and plain-language explanation.
+4. **Grammar Notes**: Use a table with location, original phrase, corrected phrase, rule reference, and one sentence naming the mismatch and correction rule.
 5. **Clean Corrected Text**: Provide the final corrected text without markup.
 
 Use this HTML structure as the report baseline:
@@ -86,7 +84,7 @@ Use this HTML structure as the report baseline:
     <h2>Summary</h2>
     <ul>
       <li><strong>Total corrections:</strong> [number]</li>
-      <li><strong>Main patterns:</strong> [short pattern summary]</li>
+      <li><strong>Counts by rule:</strong> [rule names and counts in descending order]</li>
     </ul>
   </section>
 
@@ -127,7 +125,7 @@ Use this HTML structure as the report baseline:
           <td>[short original phrase]</td>
           <td>[short corrected phrase]</td>
           <td>Rule [number]: [rule name]</td>
-          <td>[plain-language explanation]</td>
+          <td>[grammatical mismatch and correction rule]</td>
         </tr>
       </tbody>
     </table>
@@ -160,13 +158,13 @@ Corrected:
 
 | Location | Original | Correction | Rule | Why |
 |---|---|---|---|---|
-| <paragraph/sentence cue> | <short original phrase> | <short corrected phrase> | Rule <number>: <rule name> | <plain-language explanation> |
+| <paragraph/sentence cue> | <short original phrase> | <short corrected phrase> | Rule <number>: <rule name> | <grammatical mismatch and correction rule> |
 
-## Reader-Friendly Summary
+## Summary
 
-- <highest-impact correction or pattern>
-- <second-highest-impact correction or pattern>
-- <optional note about text that was already clear>
+- <most frequent correction type and count>
+- <second-most frequent correction type and count>
+- <number of paragraphs with no corrections>
 ```
 
 ## Rules
@@ -174,8 +172,8 @@ Corrected:
 - Do not change factual content, citations, variables, code, equations, names, or quoted text unless the user explicitly asks.
 - Do not rewrite for style beyond what is needed to fix grammar, mechanics, or idiomatic usage.
 - Do not mark dialect-specific variants as errors unless the user requested a specific variety of English.
-- When English variety matters and the user did not specify one, keep the existing variety if it is consistent; otherwise use standard American English.
-- Keep tables readable by using short phrases in cells. Move longer explanations below the table if needed.
+- When the input mixes English varieties and the user did not specify one, use the variety represented by the greater number of variety-specific spellings; ask the user when the counts tie.
+- Limit `Original`, `Correction`, and `Why` cells to 30 words each. Put additional explanation below the table and reference the table row number.
 - In HTML reports, escape user-supplied text before inserting it into HTML; only generated `<del>` and `<ins>` tags should be markup.
 - Use `<del>` for removed original wording and `<ins>` for inserted corrected wording in the highlighted difference section.
-- If no grammar issues are found, say so clearly and include the corrected text unchanged.
+- If no grammar issues are found, write `No grammar issues found.` and include the supplied text unchanged.
