@@ -18,8 +18,9 @@ This repository stores project skills under `resources/skills/`.
 
 Ready-to-use skills in this repository:
 
-- [`literature-review`](resources/skills/literature-review/SKILL.md) - Summarize academic PDF publications into structured Markdown with per-bullet source locations.
+- [`literature-review-citation`](resources/skills/literature-review-citation/SKILL.md) - Draft two literature-review sentences from a paper PDF and review theme: a relevant contribution and limitation, followed by supporting original sentences and source locations.
 - [`topic-literature-search`](resources/skills/topic-literature-search/SKILL.md) - Search academic sources for a topic, verify candidate papers, and produce a sourced top-10 literature summary.
+- [`venue-research-opportunity-mapper`](resources/skills/venue-research-opportunity-mapper/SKILL.md) - Analyze papers from a target venue against a research question to identify gaps, research opportunities, and a staged research plan.
 - [`ieee-manuscript-review`](resources/skills/ieee-manuscript-review/SKILL.md) - Review IEEE Transactions manuscripts using a detailed checklist and issue-based output format.
 - [`paper-readability-check`](resources/skills/paper-readability-check/SKILL.md) - Check paper readability with a fixed sentence- and paragraph-level strategy checklist and actionable rewrite guidance.
 - [`grammar-check`](resources/skills/grammar-check/SKILL.md) - Check grammar, punctuation, mechanics, and usage with explicit rule references in a reader-friendly before/after HTML report.
